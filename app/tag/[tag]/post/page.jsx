@@ -1,6 +1,6 @@
 "use client"
-import PostCard from "@/components/PostCard"
-import { getPostsByTag } from "@/services/post"
+import PostCard from "../../../../components/PostCard"
+import { getPostsByTag } from "../../../../services/post"
 import { useParams } from "next/navigation"
 import React, { useEffect, useState } from "react"
 

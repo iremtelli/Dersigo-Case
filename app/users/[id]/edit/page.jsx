@@ -1,29 +1,32 @@
 "use client"
-import { Formik, Field, Form } from "formik"
 import React, { useEffect, useState } from "react"
-import { updateUser, getUserDetail } from "../../../../services/user"
-import { useParams, useRouter } from "next/navigation"
-import toast from "react-hot-toast"
+import { useParams } from "next/navigation"
+import { getUserPosts } from "../../../../services/post"
+import Link from "next/link"
+import PostCard from "../../../../components/PostCard"
+import { getUserDetail } from "../../../../services/user"
 
 export default function EditUserPage() {
-  const router = useRouter()
   const params = useParams()
-  const [user, setUser] = useState({})
   const [loading, setLoading] = useState(true)
+  const [posts, setPosts] = useState([])
+  const [user, setUser] = useState({})
 
   useEffect(() => {
-    getUserDetail(params.id)
-      .then((res) => {
-        setUser(res)
-      })
-      .finally(() => setLoading(false))
+    getPostList()
+    getUser()
   }, [])
 
-  const handleUpdateUser = async (values) => {
-    const response = await updateUser(values, params.id)
-    if (response.ok) {
-      toast.success("User updated")
-    }
+  const getPostList = async () => {
+    const response = await getUserPosts(params.id)
+    setPosts(response?.data)
+    setLoading(false)
+  }
+
+  const getUser = async () => {
+    const response = await getUserDetail(params.id)
+    setUser(response)
+    console.log(response)
   }
 
   if (loading) {
@@ -32,28 +35,34 @@ export default function EditUserPage() {
 
   return (
     <div>
-      <h1>
-        Update User: {user.firstName} {user.lastName}
-      </h1>
-      <Formik
-        initialValues={{
-          firstName: user.firstName,
-          lastName: user.lastName,
-        }}
-        onSubmit={(values) => {
-          handleUpdateUser(values) // Pass the values as an object with a "data" property
-        }}
-      >
-        <Form>
-          <label htmlFor="firstName">First Name</label>
-          <Field id="firstName" name="firstName" placeholder="Jane" />
-
-          <label htmlFor="lastName">Last Name</label>
-          <Field id="lastName" name="lastName" placeholder="Doe" />
-
-          <button type="submit">update</button>
-        </Form>
-      </Formik>
+      {user && (
+        <div>
+          <h1>
+            {user.title} {user.firstName} {user.lastName}
+          </h1>
+          <img src={user.picture} />
+          <p>Email:{user.email}</p>
+          <p>Phone:{user.phone}</p>
+          <p>Location:{user.location?.country}</p>
+        </div>
+      )}
+      <br />
+      <h1 className="text-[42px] font-bold">Post List</h1>
+      {posts && posts.length > 0 ? (
+        <div>
+          {posts?.map((post) => (
+            <PostCard
+              key={post.id}
+              post={post}
+              updateable
+              deleteable
+              editUrl={`/users/${params.id}/posts/${post.id}/edit`}
+            />
+          ))}
+        </div>
+      ) : (
+        <p>loading...</p>
+      )}
     </div>
   )
 }

@@ -1,6 +1,5 @@
 "use client"
-
-import { getPostDetail } from "@/services/post"
+import { getPostDetail } from "../../../services/post"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import React, { useEffect, useState } from "react"
@@ -24,14 +23,14 @@ const PostDetail = () => {
 
   return (
     <div>
-      <p> title: {post.text}</p>
+      <p> title:{post?.text}</p>
       <br />
-      <img width={150} src={post.image} />
+      <img width={150} src={post?.image} />
       <br />
-      <p>likes: {post.likes}</p>
+      <p>likes: {post?.likes}</p>
       <br />
       <p>
-        owner: {post.owner?.firstName} {post.owner?.lastName}
+        owner: {post?.owner?.firstName} {post?.owner?.lastName}
       </p>
       <div className="flex gap-10 bg-red-500">
         tags:

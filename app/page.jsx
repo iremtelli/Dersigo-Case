@@ -23,14 +23,22 @@ export default function UserListPage() {
   }
 
   return (
-    <div>
+    <div className="text-center">
       {userData && userData.length > 0 ? (
         <div>
-          <h2>User List</h2>
-          <Link href="users/create">Create new user</Link>
-          {userData.map((user) => (
-            <UserCart key={user.id} data={user} deleteUser={deleteUser} />
-          ))}
+          <h2 className="text-2xl font-bold mb-4">User List</h2>
+          <Link
+            href="users/create"
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+          >
+            Create new user
+          </Link>
+
+          <div className="grid gap-4">
+            {userData.map((user) => (
+              <UserCart key={user.id} data={user} deleteUser={deleteUser} />
+            ))}
+          </div>
         </div>
       ) : (
         <p>loading...</p>

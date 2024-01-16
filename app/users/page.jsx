@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react"
 
 import Link from "next/link"
-import { deleteUserService, getUserListData } from "@/services/user"
-import UserCart from "@/components/UserCart"
+import { deleteUserService, getUserListData } from "../../services/user"
+import UserCart from "../../components/UserCart"
 
 export default function UserListPage() {
   const [userData, setUserData] = useState(null)
@@ -24,11 +24,16 @@ export default function UserListPage() {
   }
 
   return (
-    <div>
+    <div className="text-center">
       {userData && userData.length > 0 ? (
         <div>
-          <h2>User List</h2>
-          <Link href="users/create">Create new user</Link>
+          <h2 className="text-2xl font-bold mb-4">User List</h2>
+          <Link
+            href="users/create"
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+          >
+            Create new user
+          </Link>
           {userData.map((user) => (
             <UserCart key={user.id} data={user} deleteUser={deleteUser} />
           ))}

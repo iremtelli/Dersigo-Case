@@ -1,5 +1,9 @@
 "use client"
-import { UpdatePost, getPostDetail, updatePost } from "@/services/post"
+import {
+  UpdatePost,
+  getPostDetail,
+  updatePost,
+} from "../../../../../../services/post"
 import { ErrorMessage, Field, Form, Formik } from "formik"
 import { useParams } from "next/navigation"
 import React, { useEffect, useState } from "react"
