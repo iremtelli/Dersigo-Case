@@ -6,6 +6,7 @@ import { getUserPosts } from "../../../../services/post"
 import Link from "next/link"
 import PostCard from "../../../../components/PostCard"
 import { getUserDetail } from "../../../../services/user"
+import LoadingSpin from "../../../../components/Loading"
 
 export default function EditUserPage() {
   const params = useParams()
@@ -30,7 +31,7 @@ export default function EditUserPage() {
   }
 
   if (loading) {
-    return <div>Loading</div>
+    return <LoadingSpin />
   }
 
   return (

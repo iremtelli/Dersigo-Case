@@ -39,7 +39,7 @@ export default function UserListPage() {
           ))}
         </div>
       ) : (
-        <p>loading...</p>
+        <LoadingSpin />
       )}
     </div>
   )

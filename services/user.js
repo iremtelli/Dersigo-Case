@@ -47,7 +47,7 @@ export async function createUser(data) {
   })
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch data: ${JSON.stringify(await res.json())}`)
+    throw new Error(`operation failed : ${JSON.stringify(await res.json())}`)
   }
 
   return res

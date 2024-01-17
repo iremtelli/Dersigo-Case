@@ -33,8 +33,8 @@ export default function CreatePostPage() {
   }
 
   return (
-    <div>
-      <h1>Create Post</h1>
+    <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+      <h1 className="text-2xl font-bold mb-4">Create Post</h1>
       <Formik
         initialValues={{
           text: "",
@@ -48,17 +48,50 @@ export default function CreatePostPage() {
           handleCreatePost(values)
         }}
       >
-        <Form>
+        <Form className="space-y-4">
           <br />
-          <label htmlFor="text">Text</label>
-          <Field id="text" name="text" placeholder="Enter post text" />
-          <ErrorMessage name="text" component="div" />
+          <label
+            htmlFor="text"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Text
+          </label>
+          <Field
+            id="text"
+            name="text"
+            className="mt-1 p-2 w-full border rounded-md"
+            placeholder="Enter post text"
+          />
+          <ErrorMessage
+            name="text"
+            component="div"
+            className="text-red-500 text-sm"
+          />
           <br />
-          <label htmlFor="image">Image URL</label>
-          <Field id="image" name="image" placeholder="Enter image URL" />
-          <ErrorMessage name="image" component="div" />
+          <label
+            htmlFor="image"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Image URL
+          </label>
+          <Field
+            id="image"
+            name="image"
+            placeholder="Enter image URL"
+            className="mt-1 p-2 w-full border rounded-md"
+          />
+          <ErrorMessage
+            name="image"
+            component="div"
+            className="text-red-500 text-sm"
+          />
           <br />
-          <label htmlFor="likes">Likes</label>
+          <label
+            htmlFor="likes"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Likes
+          </label>
           <Field
             id="likes"
             name="likes"
@@ -67,9 +100,19 @@ export default function CreatePostPage() {
           />
           <br />
           <label htmlFor="tags">Tags</label>
-          <Field id="tags" name="tags" placeholder="Enter tags " />
+          <Field
+            id="tags"
+            name="tags"
+            placeholder="Enter tags "
+            className="mt-1 p-2 w-full border rounded-md"
+          />
           <br />
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Submit
+          </button>
         </Form>
       </Formik>
     </div>

@@ -1,14 +1,31 @@
+"use client"
 import Link from "next/link"
 import React from "react"
+import { deletePostService } from "../services/post"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 function PostCard({ post, updateable, deleteable, editUrl = "/" }) {
+  const router = useRouter()
+  const deletePost = async (postId) => {
+    try {
+      await deletePostService(postId)
+      toast.success("Post deleted")
+      router.push("/posts")
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
-    <div className="bg-white shadow-md p-4 rounded-md mb-4">
-      <Link href={`/posts/${post.id}`}>
-        <h1 className="text-xl font-bold mb-2">
-          {post.owner.title} {post.owner.firstName} {post.owner.lastName}
-        </h1>
-      </Link>
+    <Link
+      className="bg-white shadow-md p-4 rounded-md mb-4"
+      href={`/posts/${post.id}`}
+    >
+      <h1 className="text-xl font-bold mb-2">
+        {post.owner.title} {post.owner.firstName} {post.owner.lastName}
+      </h1>
+
       <img
         src={post.image}
         className="w-full h-48 object-cover mb-2"
@@ -23,12 +40,14 @@ function PostCard({ post, updateable, deleteable, editUrl = "/" }) {
           Update Post
         </Link>
       )}
-      {deleteable && (
-        <button className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
-          Delete Post
-        </button>
-      )}
-    </div>
+
+      <button
+        className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+        onClick={() => deletePost(post.id)}
+      >
+        Delete Post
+      </button>
+    </Link>
   )
 }
 

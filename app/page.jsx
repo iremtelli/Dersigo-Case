@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import UserCart from "../components/UserCart"
 import Link from "next/link"
 import { deleteUserService, getUserListData } from "../services/user"
+import LoadingSpin from "../components/Loading"
 
 export default function UserListPage() {
   const [userData, setUserData] = useState(null)
@@ -41,7 +42,7 @@ export default function UserListPage() {
           </div>
         </div>
       ) : (
-        <p>loading...</p>
+        <LoadingSpin />
       )}
     </div>
   )

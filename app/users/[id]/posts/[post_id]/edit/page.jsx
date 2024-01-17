@@ -8,6 +8,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik"
 import { useParams } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import LoadingSpin from "../../../../../../components/Loading"
 
 function EditPost() {
   const [post, setPost] = useState(null)
@@ -43,7 +44,7 @@ function EditPost() {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return <LoadingSpin />
   }
 
   if (!post) {
@@ -51,8 +52,8 @@ function EditPost() {
   }
 
   return (
-    <div>
-      <h1>Edit Post: {post.text}</h1>
+    <div className="max-w-2xl mx-auto mt-8 p-8  bg-white rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold mb-4">Edit Post: {post.text}</h1>
       <Formik
         initialValues={{
           text: post.text,
@@ -67,27 +68,83 @@ function EditPost() {
         }}
       >
         <Form>
-          <br />
-          <label htmlFor="text">Text</label>
-          <Field id="text" name="text" placeholder="Enter post text" />
-          <ErrorMessage name="text" component="div" />
-          <br />
-          <label htmlFor="image">Image URL</label>
-          <Field id="image" name="image" placeholder="Enter image URL" />
-          <ErrorMessage name="image" component="div" />
-          <br />
-          <label htmlFor="likes">Likes</label>
-          <Field
-            id="likes"
-            name="likes"
-            type="number"
-            placeholder="Enter initial likes"
-          />
-          <br />
-          <label htmlFor="tags">Tags</label>
-          <Field id="tags" name="tags" placeholder="Enter tags " />
-          <br />
-          <button type="submit">Submit</button>
+          <div className="mb-4">
+            <label
+              htmlFor="text"
+              className="block text-sm font-semibold text-gray-600"
+            >
+              Text
+            </label>
+            <Field
+              id="text"
+              name="text"
+              placeholder="Enter post text"
+              className="w-full mt-1 p-2 border rounded-md focus:outline-none focus:border-blue-500"
+            />
+            <ErrorMessage
+              name="text"
+              component="div"
+              className="text-red-500 text-sm"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              htmlFor="image"
+              className="block text-sm font-semibold text-gray-600"
+            >
+              Image URL
+            </label>
+            <Field
+              id="image"
+              name="image"
+              type="text"
+              className="w-full mt-1 p-2 border rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Enter image URL"
+            />
+            <ErrorMessage
+              name="text"
+              component="div"
+              className="text-red-500 text-sm"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              htmlFor="likes"
+              className="block text-sm font-semibold text-gray-600"
+            >
+              Likes
+            </label>
+            <Field
+              id="likes"
+              name="likes"
+              type="number"
+              className="w-full mt-1 p-2 border rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Enter initial likes"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="tags"
+              className="block text-sm font-semibold text-gray-600"
+            >
+              Tags
+            </label>
+            <Field
+              id="tags"
+              name="tags"
+              type="text"
+              className="w-full mt-1 p-2 border rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Enter tags"
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+          >
+            Submit
+          </button>
         </Form>
       </Formik>
     </div>

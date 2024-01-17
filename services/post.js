@@ -106,3 +106,16 @@ export async function updatePost(data, id) {
 
   return res
 }
+export async function deletePostService(id) {
+  const res = await fetch(`https://dummyapi.io/data/v1/post/${id}`, {
+    method: "DELETE",
+    headers: {
+      "app-id": appId,
+    },
+  })
+  if (!res.ok) {
+    toast.error("Failed to delete")
+  }
+
+  return res.JSON
+}
