@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react"
-
+import LoadingSpin from "../../components/Loading"
 import Link from "next/link"
 import { deleteUserService, getUserListData } from "../../services/user"
 import UserCart from "../../components/UserCart"
